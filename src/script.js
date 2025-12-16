@@ -164,6 +164,7 @@ window.addEventListener('resize', ()=>{
 });
 
 if (window.innerWidth < 768) {
+  camera.position.set(0, 0, 10);
   directionalLight.position.copy(camera.position).normalize().multiplyScalar(5);
   directionalLight.target.position.set(0, 0, 0);
   directionalLight.target.updateMatrixWorld();
