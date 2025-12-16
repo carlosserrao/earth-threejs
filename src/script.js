@@ -5,6 +5,8 @@ import GUI from 'lil-gui';
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
 
+const isMobile = window.innerWidth < 768;
+
 const debugObject = {};
 const gui = new GUI();
 gui.show(false);
@@ -47,7 +49,7 @@ controls.update();
 //Create objects and add it to the scene
 
 //Earth
-const earthGeometry = new THREE.SphereGeometry(1, 350, 350);
+const earthGeometry = new THREE.SphereGeometry(1, 64, 64);
 
 const textureLoader = new THREE.TextureLoader();
 const earthAlbedo = textureLoader.load('/textures/2k_earth_daymap.jpg');
@@ -84,6 +86,20 @@ textureLoader.load('/textures/space.png', (texture) => {
   scene.environment = texture;
   scene.background = texture;
 });
+
+if (!isMobile) {
+  textureLoader.load('/textures/space.png', (texture) => {
+    texture.mapping = THREE.EquirectangularReflectionMapping;
+    scene.environment = texture;
+    scene.background = texture;
+  });
+} else {
+    textureLoader.load('/textures/space.jpg', (texture) => {
+    texture.mapping = THREE.EquirectangularReflectionMapping;
+    scene.environment = texture;
+    //scene.background = texture;
+  }); 
+}
 
 
 const directionalLight = new THREE.DirectionalLight(0xffffff, 3.5);
@@ -143,7 +159,7 @@ fontLoader.load('/fonts/Maghfirea.json', (font) => {
 //Create a render
 const renderer = new THREE.WebGLRenderer({canvas: canvas});
 renderer.setSize(viewportSize.width, viewportSize.height);
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
 
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure = 0.8; // <– Reduce from 1.0 to darken
