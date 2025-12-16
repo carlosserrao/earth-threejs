@@ -10,7 +10,7 @@ A 3D interactive Earth scene built with [Three.js](https://threejs.org/) and [Vi
 
 ## 🚀 Demo
 
-👉 (https://your-vercel-app.vercel.app/)  
+👉 (https://earth-threejs-three.vercel.app/)  
 
 ---
 
@@ -24,11 +24,11 @@ A 3D interactive Earth scene built with [Three.js](https://threejs.org/) and [Vi
 
 ## 🛠 Setup
 
-# Install dependencies
+### Install dependencies
 npm install
 
-# Run dev server
+### Run dev server
 npm run dev
 
-# Build for production
+### Build for production
 npm run build
