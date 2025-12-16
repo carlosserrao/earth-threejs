@@ -86,7 +86,7 @@ textureLoader.load('/textures/space.png', (texture) => {
 });
 
 
-const directionalLight = new THREE.DirectionalLight(0xffffff, 2.5);
+const directionalLight = new THREE.DirectionalLight(0xffffff, 3.5);
 directionalLight.position.set(3, -1, -3); // x, y, z
 scene.add(directionalLight);
 
@@ -145,6 +145,9 @@ const renderer = new THREE.WebGLRenderer({canvas: canvas});
 renderer.setSize(viewportSize.width, viewportSize.height);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 0.8; // <– Reduce from 1.0 to darken
+
 //Window resize
 window.addEventListener('resize', ()=>{
     viewportSize.width = window.innerWidth;
@@ -159,6 +162,12 @@ window.addEventListener('resize', ()=>{
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
 });
+
+if (window.innerWidth < 768) {
+  directionalLight.position.copy(camera.position).normalize().multiplyScalar(5);
+  directionalLight.target.position.set(0, 0, 0);
+  directionalLight.target.updateMatrixWorld();
+}
 
 //Render and animate the scene
 const clock = new THREE.Clock();
