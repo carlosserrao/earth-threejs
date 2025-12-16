@@ -81,12 +81,6 @@ scene.add(sphere);
 gui.add(sphere.rotation, 'y', sphere.rotation.y, 2*Math.PI).name('Earth rotation');
 
 
-textureLoader.load('/textures/space.png', (texture) => {
-  texture.mapping = THREE.EquirectangularReflectionMapping;
-  scene.environment = texture;
-  scene.background = texture;
-});
-
 if (!isMobile) {
   textureLoader.load('/textures/space.png', (texture) => {
     texture.mapping = THREE.EquirectangularReflectionMapping;
