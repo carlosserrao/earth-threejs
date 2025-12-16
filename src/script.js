@@ -31,7 +31,7 @@ const scene = new THREE.Scene();
 //Create a camera and position it on the scene
 //FOV between 45-75
 const camera = new THREE.PerspectiveCamera(45,viewportSize.width/viewportSize.height, 0.1, 500);
-camera.position.set(0, 0, 5);
+camera.position.set(0, 0, 7);
 gui.add(camera.position, 'z', 1, 10).name('Camera position');
 camera.lookAt(0, 0, 0);
 scene.add(camera);
@@ -93,9 +93,9 @@ scene.add(directionalLight);
 const lightFolder = gui.addFolder('Directional Light');
 
 // Reasonable position range for scene space (e.g. -10 to +10)
-lightFolder.add(directionalLight.position, 'x', -10, 10).name('X Position');
-lightFolder.add(directionalLight.position, 'y', -10, 10).name('Y Position');
-lightFolder.add(directionalLight.position, 'z', -10, 10).name('Z Position');
+lightFolder.add(directionalLight.position, 'x', -20, 20).name('X Position');
+lightFolder.add(directionalLight.position, 'y', -20, 20).name('Y Position');
+lightFolder.add(directionalLight.position, 'z', -20, 20).name('Z Position');
 
 // Light intensity range — tweak as needed
 lightFolder.add(directionalLight, 'intensity', 0, 5).name('Intensity');
@@ -166,7 +166,7 @@ window.addEventListener('resize', ()=>{
 if (window.innerWidth < 768) {
   camera.position.set(0, 0, 10);
   directionalLight.position.copy(camera.position).normalize().multiplyScalar(5);
-  directionalLight.target.position.set(0, 0, 0);
+  directionalLight.target.position.set(-270, 0, 180);
   directionalLight.target.updateMatrixWorld();
 }
 
