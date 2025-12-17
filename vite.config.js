@@ -3,5 +3,8 @@ import { defineConfig } from 'vite';
 
 export default defineConfig({
   root: 'src', // Set the root directory to /src
-  publicDir: '../static/'
+  publicDir: '../static/',
+  server: {
+    host: true
+  }
 });
